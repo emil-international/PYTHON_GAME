@@ -166,47 +166,9 @@ class sniper_bullet(bullets):
 class GameWindow(pyglet.window.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.create_objects_on_map()
 
-        self.shoot = 0
 
-        self.hero = Hero(10, 100, resourses())
-        self.zombies = [Zombie_usual(randint(200, 300),
-                                     randint(600, 800),
-                                     resourses(),
-                                     self.hero) for i in range(3)]
-        self.walls = []
-        self.walls.append(wall(10,
-                               50,
-                               resourses(),
-                               "horiz",
-                               780))
-
-        self.walls.append(wall(300,
-                               250,
-                               resourses(),
-                               "horiz",
-                               200))
-
-        self.walls.append(wall(10,
-                               150,
-                               resourses(),
-                               "horiz",
-                               100))
-
-        self.walls.append(wall(690,
-                               150,
-                               resourses(),
-                               "horiz",
-                               100))
-
-        self.walls.append(wall(10,
-                               50,
-                               resourses(),
-                               "vert",
-                               600))
-        self.walls.append(wall(790, 50, resourses(), "vert", 600))
-
-        self.bullets = []
 
     def on_draw(self):
         self.clear()
@@ -357,6 +319,49 @@ class GameWindow(pyglet.window.Window):
         label.draw()
         label2.draw()
         label3.draw()
+
+    def create_objects_on_map(self):
+        self.shoot = 0
+
+        self.hero = Hero(10, 100, resourses())
+        self.zombies = [Zombie_usual(randint(200, 300),
+                                     randint(600, 800),
+                                     resourses(),
+                                     self.hero) for i in range(3)]
+        self.walls = []
+        self.walls.append(wall(10,
+                               50,
+                               resourses(),
+                               "horiz",
+                               780))
+
+        self.walls.append(wall(300,
+                               250,
+                               resourses(),
+                               "horiz",
+                               200))
+
+        self.walls.append(wall(10,
+                               150,
+                               resourses(),
+                               "horiz",
+                               100))
+
+        self.walls.append(wall(690,
+                               150,
+                               resourses(),
+                               "horiz",
+                               100))
+
+        self.walls.append(wall(10,
+                               50,
+                               resourses(),
+                               "vert",
+                               600))
+        self.walls.append(wall(790, 50, resourses(), "vert", 600))
+
+        self.bullets = []
+
 
 if __name__ == "__main__":
     window = GameWindow(800, 600)
