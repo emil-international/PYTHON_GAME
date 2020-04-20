@@ -1,8 +1,7 @@
 import pyglet
 from random import randint
 from pyglet.window import key
-from pyglet.gl import *
-
+from pyglet.gl import GL_LINES
 
 class resourses:
     def __init__(self):
@@ -36,6 +35,8 @@ class GameObject:
 
     def draw(self):
         self.picture.blit(self.x, self.y)
+
+
 class Unit(GameObject):
     def set_collision(self, x_right_velocity=-1, x_left_velocity=-1,
                       y_up_velocity=-1, y_down_velocity=-1):
@@ -53,6 +54,8 @@ class Unit(GameObject):
             self.ax = 100;
         if (self.vx > 10):
             self.ax = -100
+
+
 class Zombie_usual(Unit):
     def __init__(self, x, y, res, hero):
         super().__init__(x, y, res)
@@ -80,6 +83,8 @@ class Zombie_usual(Unit):
                 else:
                     self.vx = 40 * randint(1, 10)
                     self.ax = 0
+
+
 class Zombie_Boss(Unit):
     def __init__(self, x, y, res, hero):
         super().__init__(self, x, y, res)
@@ -99,6 +104,8 @@ class Zombie_Boss(Unit):
 
         elif (self.hero.y >= self.x) and (self.ay < 30):
             self.ay += 2
+
+
 class Hero(Unit):
     def __init__(self, x, y, res):
         super().__init__(x, y, res)
@@ -123,6 +130,8 @@ class Hero(Unit):
     def jump(self):
         if ((self.y == 0) or (self.concerns == True)):
             self.vy = self.jump_speed
+
+
 class wall(GameObject):
     def __init__(self, x, y, res, orientation, length):
         super().__init__(x, y, res)
@@ -183,6 +192,7 @@ class GameWindow(pyglet.window.Window):
 
         for bul in self.bullets:
             bul.draw()
+
     def collision_walls(self, dt, object1):
         for wall in self.walls:
             if (wall.orientation == "horiz"):
